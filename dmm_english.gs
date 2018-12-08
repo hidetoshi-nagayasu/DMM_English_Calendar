@@ -13,7 +13,7 @@
 var CALENDAR_NAME = 'DMM英会話_Hide';
 var MAIL_SEARCH_QUERY = 'newer_than:1d subject:"【DMM英会話】レッスン予約完了のお知らせ"';
 var BODY_SEARCH_QUERY = '■　英会話 レッスン予約完了のお知らせ';
-var CANCEL_MAIL_SEARCH_QUERY = 'older_than:1d subject:"【DMM英会話】レッスン予約キャンセル完了"';
+var CANCEL_MAIL_SEARCH_QUERY = 'older_than:0d subject:"【DMM英会話】レッスン予約キャンセル完了"';
 var CANCEL_BODY_SEARCH_QUERY = '■　英会話 予約キャンセルのお知らせ';
 
 var EVENT_TITLE = 'DMM英会話';
@@ -64,13 +64,15 @@ function deleteDmmCalendar() {
           Logger.log("start= " + startDateTime);
           Logger.log("end= " + endDateTime);
 
-          // イベントを削除
           var cals = CalendarApp.getAllCalendars();
 
           for(var l = 0; l < cals.length; l++){
             if(cals[l].getName() == CALENDAR_NAME) {
+              
+              // 開始時間、終了時間、タイトルからイベントを設定
               var events = cals[l].getEvents(startDateTime, endDateTime, {search: content});
               
+              // イベントがある場合、削除
               if(events.length > 0) {
                 Logger.log("events= " + events);
                 events[0].deleteEvent();
