@@ -1,0 +1,2 @@
+# DMM_English_Calendar
+DMM英会話のレッスン追加メール受信でGoogle Calendarにイベント追加。キャンセルメール受信でイベント削除。
